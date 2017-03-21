@@ -1,7 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var webpackBase = require('./webpack.base.config')
 var port = 8080
@@ -45,8 +44,7 @@ config.plugins = (webpackBase.plugins || []).concat(
         favicon: path.resolve(__dirname, '../src/images/favicon.png'),
         inject: 'body'
         // inject: true
-    }),
-    new ExtractTextPlugin('[name].[hash].css')
+    })
 )
 
 module.exports = {

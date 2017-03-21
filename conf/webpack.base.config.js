@@ -1,11 +1,13 @@
 var path = require('path')
 var loaders = require('./loaders')
 
+var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+
 module.exports = {
     entry: {
-        app: [
-            path.resolve(__dirname, '../src/app.js')
-        ]
+        app: path.resolve(__dirname, '../src/app.js'),
+        vendor: ['react', 'react-dom', 'react-router', 'mobx', 'mobx-react']
     },
     // output: {
     //     path: path.resolve(__dirname, '../dist'),
@@ -22,5 +24,10 @@ module.exports = {
     module: {
         loaders: loaders
     },
-    plugins: []
+    plugins: [
+        new ExtractTextPlugin('[name].[hash].css'),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor'
+        })
+    ]
 }
