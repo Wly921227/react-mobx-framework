@@ -9,10 +9,6 @@ module.exports = {
         app: path.resolve(__dirname, '../src/app.js'),
         vendor: ['react', 'react-dom', 'react-router', 'mobx', 'mobx-react']
     },
-    // output: {
-    //     path: path.resolve(__dirname, '../dist'),
-    //     filename: 'bundle.js'
-    // },
     resolve: {
         alias: {
             'common': path.resolve(__dirname, '../src/common'),
@@ -25,7 +21,7 @@ module.exports = {
         loaders: loaders
     },
     plugins: [
-        new ExtractTextPlugin('[name].[hash].css'),
+        new ExtractTextPlugin('css/[name].[hash].css'),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor'
         })
