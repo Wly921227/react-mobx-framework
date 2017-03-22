@@ -3,6 +3,10 @@ const config = {
         {
             path: '/',
             component: require('common/components/hallo')
+        },
+        {
+            path: '/test',
+            component: require('pages/TestUser')
         }
     ],
     onError: {
