@@ -1,13 +1,21 @@
 # react mobx framework
 
-dev server
+react + react-router + mobx + webapck simple scaffold
 
-'''
-npm install
-npm start dev
-'''
+init project
 
-build
-'''
-npm start build
-'''
+```bash
+npm install 
+```
+
+start dev server
+
+```bash
+npm run dev 
+```
+
+build product 
+
+```bash
+npm run build
+```
