@@ -39,6 +39,7 @@
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
     "mobx-react-devtools": "^4.2.9",
+    "ora": "^1.1.0",
     "react-hot-loader": "^3.0.0-beta.5",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",

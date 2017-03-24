@@ -1,62 +1,13 @@
-import React, {Component} from 'react'
-import {Router, Route, hashHistory} from 'react-router'
+const React = require('react')
+const ReactRouter = require('react-router')
+const Router = ReactRouter.Router
 
 let config = require('./router-config')
 
-class Routers extends Component {
-
-    getRoute(conf) {
-        return conf.map((value, key) => {
-            let children
-            if (value.children) {
-                children = this.getRoute(value.children)
-            }
-            return <Route key={key} path={value.path} component={value.component}>
-                {children}
-            </Route>
-        })
-    }
-
-    getError(conf) {
-        let children
-        if (conf.children) {
-            children = this.getError(conf.children)
-        }
-        return <Route key="onerror" path={conf.path} component={conf.component}>
-            {children}
-        </Route>
-    }
+class Routers extends React.Component {
 
     render() {
-        // let getRoute = (conf) => {
-        //     return conf.map((value, key) => {
-        //         let children
-        //         if (value.children) {
-        //             children = getRoute(value.children)
-        //         }
-        //         return <Route key={key} path={value.path} component={value.component}>
-        //             {children}
-        //         </Route>
-        //     })
-        // }
-        //
-        // let getError = (conf) => {
-        //     let children
-        //     if (conf.children) {
-        //         children = getError(conf.children)
-        //     }
-        //     return <Route key="onerror" path={conf.path} component={conf.component}>
-        //         {children}
-        //     </Route>
-        // }
-
-        let routes = this.getRoute(config.routes)
-        let onError = this.getError(config.onError)
-
-        routes.push(onError)
-
-        return <Router history={hashHistory}>
-            {routes}
+        return <Router routes={config} history={ReactRouter.hashHistory}>
         </Router>
     }
 }

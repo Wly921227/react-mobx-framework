@@ -21,7 +21,7 @@ module.exports = {
         loaders: loaders
     },
     plugins: [
-        new ExtractTextPlugin('css/[name].[hash].css'),
+        new ExtractTextPlugin('css/style.[hash].css'),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor'
         })
