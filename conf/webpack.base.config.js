@@ -18,12 +18,25 @@ module.exports = {
         extensions: ['', '.js', '.json', '.less', '.css']
     },
     module: {
-        loaders: loaders
+        loaders: loaders,
+
+        // require
+        // unknownContextRegExp: /$^/,
+        // unknownContextCritical: false,
+
+        // require(expr)
+        // exprContextRegExp: /$^/,
+        // exprContextCritical: false,
+
+        // require("prefix" + expr + "surfix")
+        wrappedContextRegExp: /$^/,
+        wrappedContextCritical: false
     },
     plugins: [
         new ExtractTextPlugin('css/style.[hash].css'),
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor'
+            minChunks: 2,
+            name: ['vendor']
         })
     ]
 }

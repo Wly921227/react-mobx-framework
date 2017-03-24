@@ -1,11 +1,25 @@
 const config = {
     path: '/',
-    component: require('common/components/app'),
-    indexRoute: { component: require('common/components/hallo') },
+    getComponent: (nextState, callback) => {
+        require.ensure([], (require) => {
+            callback(null, require('common/components/app'))
+        }, 'app')
+    },
+    indexRoute: {
+        getComponent: (nextState, callback) => {
+            require.ensure([], (require) => {
+                callback(null, require('common/components/hallo'))
+            }, 'hallo')
+        }
+    },
     childRoutes: [
         {
             path: '/test',
-            component: require('pages/TestUser')
+            getComponent: (nextState, callback) => {
+                require.ensure([], (require) => {
+                    callback(null, require('pages/TestUser'))
+                }, 'TestUser')
+            }
         }
         // { path: 'child', component: Child },
         // {
