@@ -8,25 +8,15 @@ class Test extends React.Component {
         this.setState({
             users: []
         })
-        $http.post({
-            url: '/auth/login',
-            data: {
-                uname: 'admin',
-                upassword: 'admin'
-            }
-        }).then(data => {
-            console.log(data)
-        })
-        $http.get({
-            url: '/test/getUser',
-            data: {
-                uId: 1
-            }
-        }).then(data => {
-            this.setState({
-                users: data.result
-            })
-        })
+        // $http.post({
+        //     url: '/auth/login',
+        //     data: {
+        //         uname: 'admin',
+        //         upassword: 'admin'
+        //     }
+        // }).then(data => {
+        //     console.log(data)
+        // })
     }
 
     render() {

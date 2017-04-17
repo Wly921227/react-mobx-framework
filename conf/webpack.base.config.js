@@ -2,7 +2,6 @@ var path = require('path')
 var loaders = require('./loaders')
 
 var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
     entry: {
@@ -18,25 +17,16 @@ module.exports = {
         extensions: ['', '.js', '.json', '.less', '.css']
     },
     module: {
-        loaders: loaders,
-
-        // require
-        // unknownContextRegExp: /$^/,
-        // unknownContextCritical: false,
-
-        // require(expr)
-        // exprContextRegExp: /$^/,
-        // exprContextCritical: false,
-
-        // require("prefix" + expr + "surfix")
-        wrappedContextRegExp: /$^/,
-        wrappedContextCritical: false
+        loaders: loaders
     },
-    plugins: [
-        new ExtractTextPlugin('css/style.[hash].css'),
-        new webpack.optimize.CommonsChunkPlugin({
-            minChunks: 2,
-            name: ['vendor']
-        })
-    ]
+    // mixin less写法
+    postcss: function () {
+        return [
+            require('precss'),
+            require('autoprefixer')({
+                browsers: ['last 2 version', 'ie >= 8'],
+                remove: false
+            })
+        ]
+    }
 }
