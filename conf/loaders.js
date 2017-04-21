@@ -20,14 +20,14 @@ var loaders = [
     },
     // images
     {
-        test: /\.(png|jpg)$/,
+        test: /\.(png|jpg|gif|jpeg)$/,
         loader: 'url?limit=1000'   // 单位b
     }
 ]
 
 if (process.env.NODE_ENV === 'production') {
     // 生产环境css单独打包
-    loaders = loaders.concat(loaders, [
+    loaders = loaders.concat([
         // less
         {
             test: /\.less?$/,
@@ -43,7 +43,7 @@ if (process.env.NODE_ENV === 'production') {
     ])
 } else {
     // 开发环境css热加载
-    loaders = loaders.concat(loaders, [
+    loaders = loaders.concat([
         // less
         {
             test: /\.less?$/,
