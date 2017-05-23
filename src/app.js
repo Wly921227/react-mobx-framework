@@ -1,21 +1,25 @@
-require('common/style.less')
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
 
-let React = require('react')
-let ReactDOM = require('react-dom')
-let Routers = require('./router')
+const Routers = require('./router')
 
-ReactDOM.render(
-    <Routers/>,
-    document.getElementById('main')
-)
+const Component = require('common/components/hallo')
+
+const render = (Component) => {
+    ReactDOM.render(
+        <AppContainer>
+            <Component/>
+        </AppContainer>,
+        document.getElementById('main')
+    )
+}
+
+render(Routers)
 
 if (module.hot) {
     module.hot.accept('./router', () => {
         const NextApp = require('./router');
-
-        ReactDOM.render(
-            <NextApp/>,
-            document.getElementById('main')
-        );
+        render(NextApp)
     });
 }

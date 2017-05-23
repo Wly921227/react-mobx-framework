@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
+import './style.less'
 
-require('./style.less')
+import React, {Component} from 'react'
 
 class Hallo extends Component {
     render() {

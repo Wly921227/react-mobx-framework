@@ -1,32 +1,27 @@
-var path = require('path')
-var loaders = require('./loaders')
+const path = require('path')
+const rules = require('./loaders')
 
-var webpack = require('webpack')
+const webpack = require('webpack')
 
 module.exports = {
+    context: path.resolve(__dirname, '../src'),
     entry: {
-        app: path.resolve(__dirname, '../src/app.js'),
-        vendor: ['react', 'react-dom', 'react-router', 'mobx', 'mobx-react']
+        app: path.resolve(__dirname, '../src/app.js')
     },
     resolve: {
-        alias: {
-            'common': path.resolve(__dirname, '../src/common'),
-            'images': path.resolve(__dirname, '../src/images'),
-            'pages': path.resolve(__dirname, '../src/pages')
-        },
-        extensions: ['', '.js', '.json', '.less', '.css']
+        modules: [
+            path.resolve(__dirname, '../src'),
+            path.resolve(__dirname, '../node_modules')
+        ],
+        // alias: {
+        //     'common': path.resolve(__dirname, '../src/common'),
+        //     'images': path.resolve(__dirname, '../src/images'),
+        //     'pages': path.resolve(__dirname, '../src/pages')
+        // },
+        extensions: ['.js', '.json', '.less', '.css']
     },
     module: {
-        loaders: loaders
-    },
-    // mixin less写法
-    postcss: function () {
-        return [
-            require('precss'),
-            require('autoprefixer')({
-                browsers: ['last 2 version', 'ie >= 8'],
-                remove: false
-            })
-        ]
+        // loaders: loaders,
+        rules: rules
     }
 }

@@ -1,21 +1,21 @@
 require('shelljs/global')
 env.NODE_ENV = 'production'
 
-var ora = require('ora')
-var path = require('path')
+const ora = require('ora')
+const path = require('path')
 
-var webpack = require('webpack')
-var express = require('express')
+const webpack = require('webpack')
+const express = require('express')
 
-var prodConfig = require('../conf/webpack.prod.config')
+const prodConfig = require('../conf/webpack.prod.config')
 
-var app = express()
+const app = express()
 app.use(express.static(path.join(__dirname, '../dist')))
 
-var spinner = ora('building for production...')
+const spinner = ora('building for production...')
 spinner.start()
 
-var assetsPath = path.join(__dirname, '../dist')
+const assetsPath = path.join(__dirname, '../dist')
 rm('-rf', assetsPath)
 mkdir('-p', assetsPath)
 

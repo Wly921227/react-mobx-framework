@@ -1,12 +1,12 @@
-var webpack = require('webpack')
-var WebpackDevServer = require('webpack-dev-server')
+const webpack = require('webpack')
+const WebpackDevServer = require('webpack-dev-server')
 // var express = require('express')
 
-var devConfig = require('../conf/webpack.dev.config')
+const devConfig = require('../conf/webpack.dev.config')
 
-var compiler = webpack(devConfig.config)
+const compiler = webpack(devConfig.config)
 
-var server = new WebpackDevServer(compiler, {
+let server = new WebpackDevServer(compiler, {
     stats: {
         chunks: false,
         hash: false,

@@ -1,3 +1,4 @@
+import 'common/style.less'
 const React = require('react')
 const PropType = require('prop-types')
 

@@ -1,35 +1,30 @@
-const React = require('react')
+import './style.less'
 
-const $http = require('common/http')
+import React, { Component } from 'react'
+import { observer } from 'mobx-react'
+import State from './state'
 
+@observer
 class Test extends React.Component {
 
     componentWillMount() {
-        this.setState({
-            users: []
-        })
-        // $http.post({
-        //     url: '/auth/login',
-        //     data: {
-        //         uname: 'admin',
-        //         upassword: 'admin'
-        //     }
-        // }).then(data => {
-        //     console.log(data)
-        // })
+        let app = new State()
+        this.setState({app: app})
+        setTimeout(() => {
+            this.state.app.name = 'Moyu'
+            this.state.app.age = 16
+        }, 2000)
     }
 
     render() {
-        let users = this.state.users.map(value => {
-            return <div key={value.u_id} className="user">
-                <div className="id">{value.u_id}</div>
-                <div className="name">{value.u_name}</div>
-                <div className="nickname">{value.u_nickname}</div>
-            </div>
-        })
+        let {
+            name,
+            age
+        } = this.state.app
 
         return <div className="users">
-            {users}
+            <div>{name}</div>
+            <div>{age}</div>
         </div>
     }
 

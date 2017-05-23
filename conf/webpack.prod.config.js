@@ -1,14 +1,17 @@
-var path = require('path')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-var webpackBase = require('./webpack.base.config')
-var port = 8081
-var config = Object.assign(webpackBase, {
+const webpackBase = require('./webpack.base.config')
+const port = 8081
+let config = Object.assign(webpackBase, {
+    // devtool: 'source-map'
     devtool: false  // 控制台代码映射
 })
 
+config.entry['react'] = ['react', 'react-dom', 'react-router']
+config.entry['mobx'] = ['mobx', 'mobx-react']
 Object.getOwnPropertyNames((webpackBase.entry || {})).map(function (name) {
     config.entry[name] = [].concat(webpackBase.entry[name])
 })
@@ -17,7 +20,7 @@ Object.getOwnPropertyNames((webpackBase.entry || {})).map(function (name) {
 config.output = {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
-    filename: 'js/[name].bundle.js',
+    filename: 'js/[name].bundle.[hash].js',
     chunkFilename: "js/[name].[hash].js"
 }
 
@@ -29,14 +32,14 @@ config.plugins = (webpackBase.plugins || []).concat(
         }
     }),
     new webpack.optimize.UglifyJsPlugin({
+        sourceMap: true,
         compress: {
             warnings: false
         }
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
-        title: 'WebSocket-Production',
+        title: 'Demo',
         filename: 'index.html',
         template: path.resolve(__dirname, './template/index.prod.html'),
         favicon: path.resolve(__dirname, '../src/images/favicon.png'),
@@ -51,10 +54,13 @@ config.plugins = (webpackBase.plugins || []).concat(
         // necessary to consistently work with multiple chunks via CommonsChunkPlugin
         chunksSortMode: 'dependency'
     }),
-    new ExtractTextPlugin('css/style.[hash].css'),
+    new ExtractTextPlugin({
+        filename: 'css/style.[hash].css',
+        allChunks: true
+    }),
     new webpack.optimize.CommonsChunkPlugin({
         minChunks: 2,
-        name: ['vendor']
+        name: ['react', 'mobx', 'common']
     })
 )
 
